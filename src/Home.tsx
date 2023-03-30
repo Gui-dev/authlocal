@@ -35,7 +35,7 @@ export const Home = () => {
     <View style={styles.container}>
       <StatusBar style="light" />
       <Text style={styles.text}>
-        Hello World: {isAuthenticated ? 'Sim' : 'Não'}
+        Usuário conectado: {isAuthenticated ? 'Sim' : 'Não'}
       </Text>
 
       <TouchableOpacity
