@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Alert } from 'react-native'
 import * as LocalAuthentication from 'expo-local-authentication'
 
 import { styles } from './style'
@@ -16,7 +16,15 @@ export const Home = () => {
   }
 
   const handleAuthentication = async () => {
-    console.log('Entrouuuu')
+    const isBiometricEnrolled = await LocalAuthentication.isEnrolledAsync()
+    if (!isBiometricEnrolled) {
+      return Alert.alert('Login', 'Nenhuma bimetria encontrada. Por favor, cadastre no dispositivo!')
+    }
+    const auth = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'Login com Biometria',
+      fallbackLabel: 'Biometria não reconhecida'
+    })
+    setIsAuthenticated(auth.success)
   }
 
   useEffect(() => {
@@ -25,7 +33,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <Text style={styles.text}>
         Hello World: {isAuthenticated ? 'Sim' : 'Não'}
       </Text>

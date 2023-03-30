@@ -17,11 +17,12 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     height: 40,
     width: 100,
-    backgroundColor: '#879234',
+    backgroundColor: 'blue',
     borderRadius: 8
   },
   buttonText: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: '#FFF'
   }
 })
